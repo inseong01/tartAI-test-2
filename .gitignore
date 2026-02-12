@@ -18,3 +18,5 @@ dist/
 .coverage
 .pytest_cache/
  
+# IntelliJ IDEA 
+.idea
