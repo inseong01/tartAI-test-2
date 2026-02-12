@@ -1,6 +1,6 @@
 import pytest
 from scraper.validator.key_format_validator import validate_key_format
-from scraper.exceptions.invalid_article_error import InvalidArticleDataError
+from scraper.exceptions.scraper_error import ScraperError
 
 
 VALID_URL_VALUE = {
@@ -117,7 +117,7 @@ INVALID_PUBLISHED_DATE_2 = {
     ],
 )
 def test_fail_validate_key_format(data, key):
-    with pytest.raises(InvalidArticleDataError) as exc:
+    with pytest.raises(ScraperError) as exc:
         validate_key_format(data)
 
     if key == "url":

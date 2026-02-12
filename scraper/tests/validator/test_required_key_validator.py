@@ -1,6 +1,6 @@
 import pytest
 from scraper.validator.required_key_validator import validate_required_key
-from scraper.exceptions.invalid_article_error import InvalidArticleDataError
+from scraper.exceptions.scraper_error import ScraperError
 
 SUCCESS = {
     "id": "3132",
@@ -94,7 +94,7 @@ PUBLISHED_DATE_EMPTY_VALUE = {
 )
 def test_validate_required_key(data, should_raise, key):
     if should_raise:
-        with pytest.raises(InvalidArticleDataError) as exc:
+        with pytest.raises(ScraperError) as exc:
             validate_required_key(data)
 
         assert exc.value.code == "INVALID_ARTICLE_DATA"

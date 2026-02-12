@@ -1,4 +1,4 @@
-from scraper.exceptions.invalid_article_error import InvalidArticleDataError
+from scraper.exceptions.scraper_error import ScraperError
 
 
 def validate_required_key(data: dict[str, any]):
@@ -14,7 +14,7 @@ def validate_required_key(data: dict[str, any]):
     for key in required_keys:
         value = data.get(key)
         if value == "":
-            raise InvalidArticleDataError(
+            raise ScraperError(
                 code="INVALID_ARTICLE_DATA",
                 message="필수 값이 비어 있습니다.",
                 detail={"key": key},
