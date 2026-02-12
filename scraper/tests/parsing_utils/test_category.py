@@ -1,6 +1,6 @@
 import pytest
 from bs4 import BeautifulSoup
-from scraper.url_utils import (
+from scraper.parsing_utils import (
     get_category_tag,
     parsing_category_name,
     parsing_category_url,

@@ -1,6 +1,6 @@
 import pytest
 from bs4 import BeautifulSoup
-from scraper.url_utils import parsing_thumbnail
+from scraper.parsing_utils import parsing_thumbnail
 
 HTML_WITH_THUMBNAIL = """
 <article>

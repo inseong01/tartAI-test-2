@@ -1,21 +1,21 @@
 from bs4.element import Tag
-from . import url_utils
+from . import parsing_utils
 
 
 def parse_article_tag(article: Tag):
     return {
-        "id": url_utils.parsing_id(article),
-        "url": url_utils.parsing_post_url(article),
-        "title": url_utils.parsing_title(article),
-        "thumbnail": url_utils.parsing_thumbnail(article),
+        "id": parsing_utils.parsing_id(article),
+        "url": parsing_utils.parsing_post_url(article),
+        "title": parsing_utils.parsing_title(article),
+        "thumbnail": parsing_utils.parsing_thumbnail(article),
         "category": {
-            "name": url_utils.parsing_category_name(article),
-            "url": url_utils.parsing_category_url(article),
+            "name": parsing_utils.parsing_category_name(article),
+            "url": parsing_utils.parsing_category_url(article),
         },
-        "excerpt": url_utils.parsing_excerpt(article),
+        "excerpt": parsing_utils.parsing_excerpt(article),
         "author": {
-            "name": url_utils.parsing_author_name(article),
-            "url": url_utils.parsing_author_url(article),
+            "name": parsing_utils.parsing_author_name(article),
+            "url": parsing_utils.parsing_author_url(article),
         },
-        "published_date": url_utils.parsing_published_date(article),
+        "published_date": parsing_utils.parsing_published_date(article),
     }

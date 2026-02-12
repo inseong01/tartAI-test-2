@@ -1,6 +1,10 @@
 import pytest
 from bs4 import BeautifulSoup
-from scraper.url_utils import get_author_tag, parsing_author_name, parsing_author_url
+from scraper.parsing_utils import (
+    get_author_tag,
+    parsing_author_name,
+    parsing_author_url,
+)
 
 HTML_WITH_AUTHOR = """
 <article>

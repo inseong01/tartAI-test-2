@@ -1,6 +1,6 @@
 import pytest
 from bs4 import BeautifulSoup
-from scraper.url_utils import parsing_excerpt
+from scraper.parsing_utils import parsing_excerpt
 
 HTML_WITH_EXCERPT = """
 <article>

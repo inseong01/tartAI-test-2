@@ -1,6 +1,6 @@
 import pytest
 from bs4 import BeautifulSoup
-from scraper.url_utils import get_post_footer_tags, parsing_published_date
+from scraper.parsing_utils import get_post_footer_tags, parsing_published_date
 
 HTML_WITH_FOOTER = """
 <article>
