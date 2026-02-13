@@ -7,7 +7,7 @@ class FakePythonRunner(
 
     override fun run(): String {
         if (exception != null) {
-            throw exception
+            throw RuntimeException(exception.message.toString())
         }
 
         return result
