@@ -8,8 +8,8 @@ import com.prap.api.service.ScrapingService
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.http.HttpStatus
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.web.server.ResponseStatusException
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.lang.RuntimeException
 import kotlin.test.assertEquals
 
@@ -32,7 +32,7 @@ class ScrapingServiceTest {
             ]
         """.trimIndent()
         val fakeRunner = FakePythonRunner(CORRECT_JSON_FORMAT)
-        val mockExecutor = PythonExecutor(fakeRunner, jacksonObjectMapper())
+        val mockExecutor = PythonExecutor(fakeRunner, ObjectMapper())
 
         val service = ScrapingService(mockExecutor)
         val articles = service.getArticles()
@@ -59,8 +59,8 @@ class ScrapingServiceTest {
             result = "",
             exception = RuntimeException("Python failed")
         )
-        val executor = PythonExecutor(fakeRunner, jacksonObjectMapper())
-        
+        val executor = PythonExecutor(fakeRunner, ObjectMapper())
+
         val service = ScrapingService(executor)
 
         val exception = assertThrows<ResponseStatusException> {
@@ -87,7 +87,7 @@ class ScrapingServiceTest {
             ]
         """.trimIndent()
         val fakeRunner = FakePythonRunner(EMPTY_TITLE_JSON_FORMAT)
-        val executor = PythonExecutor(fakeRunner, jacksonObjectMapper())
+        val executor = PythonExecutor(fakeRunner, ObjectMapper())
 
         val service = ScrapingService(executor)
 

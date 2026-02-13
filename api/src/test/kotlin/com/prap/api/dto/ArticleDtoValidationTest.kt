@@ -1,6 +1,6 @@
 package com.prap.api.dto
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import jakarta.validation.Validation
 import kotlin.test.Test
@@ -9,7 +9,7 @@ import kotlin.test.assertTrue
 class ArticleDtoValidationTest {
 
     private val validator = Validation.buildDefaultValidatorFactory().validator
-    private val mapper = jacksonObjectMapper()
+    private val mapper = ObjectMapper()
 
     @Test
     fun `올바른 구조면 ArticleDto 검증을 통과한다`() {

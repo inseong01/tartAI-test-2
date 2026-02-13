@@ -1,6 +1,6 @@
 package com.prap.api.python
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.prap.api.dto.ArticleDto
 import com.prap.api.dto.AuthorDto
 import com.prap.api.dto.CategoryDto
@@ -27,7 +27,7 @@ class PythonExtractorTest {
         """.trimIndent()
         val executor = PythonExecutor(
             FakePythonRunner(SUCCESS_JSON_FORMAT),
-            jacksonObjectMapper()
+            ObjectMapper()
         )
         val result = executor.runScraper()
 
@@ -59,7 +59,7 @@ class PythonExtractorTest {
         """.trimIndent()
         val executor = PythonExecutor(
             FakePythonRunner(WRONG_JSON_FORMAT),
-            jacksonObjectMapper()
+            ObjectMapper()
         )
 
         assertThrows<RuntimeException> {
