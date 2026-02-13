@@ -16,7 +16,7 @@ class PythonExecutor(
             val output = this.pythonRunner.run()
             return objectMapper.readValue(output)
         } catch (e: Exception) {
-            throw RuntimeException(e)
+            throw RuntimeException(e.message)
         }
     }
 

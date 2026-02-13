@@ -17,7 +17,7 @@ class ScrapingService(
         try {
             articles = this.pythonExecutor.runScraper()
         } catch (e: RuntimeException) {
-            throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.localizedMessage)
+            throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.message)
         }
 
         val validator = Validation.buildDefaultValidatorFactory().validator
