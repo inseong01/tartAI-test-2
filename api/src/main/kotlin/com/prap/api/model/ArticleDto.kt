@@ -1,14 +1,15 @@
 package com.prap.api.model
+
 import com.fasterxml.jackson.annotation.JsonFormat
 import jakarta.validation.constraints.NotBlank
 
 
-data class CategoryDto (
+data class CategoryDto(
     val name: String,
     val url: String
 )
 
-data class AuthorDto (
+data class AuthorDto(
     val name: String,
     val url: String
 )

@@ -8,39 +8,39 @@ import java.nio.charset.StandardCharsets
 class PythonRunner {
 
     private fun getScraperProcess(): Process {
-            val pythonDir = File("../scraper")
-            require(pythonDir.exists()) { "Python directory not found: $pythonDir" }
+        val pythonDir = File("../scraper")
+        require(pythonDir.exists()) { "Python directory not found: $pythonDir" }
 
-            return ProcessBuilder(
-                "python",
-                "-X", "utf8",
-                "-m", "scraper.main"
-            )
-                .directory(pythonDir)
-                .redirectErrorStream(true)
-                .apply {
-                    environment()["PYTHONIOENCODING"] = "UTF-8"
-                }
-                .start()
+        return ProcessBuilder(
+            "python",
+            "-X", "utf8",
+            "-m", "scraper.main"
+        )
+            .directory(pythonDir)
+            .redirectErrorStream(true)
+            .apply {
+                environment()["PYTHONIOENCODING"] = "UTF-8"
+            }
+            .start()
     }
 
     fun run(): String {
-            val process = this.getScraperProcess()
+        val process = this.getScraperProcess()
 
-            val output = process.inputStream
-                .bufferedReader(StandardCharsets.UTF_8)
-                .readText()
+        val output = process.inputStream
+            .bufferedReader(StandardCharsets.UTF_8)
+            .readText()
 
-            val exitCode = process.waitFor()
+        val exitCode = process.waitFor()
 
-            if (exitCode != 0) {
-                throw RuntimeException("Python process failed. exitCode=$exitCode\n$output")
-            }
-
-            if (output.isBlank()) {
-                throw RuntimeException("Python returned empty output")
-            }
-
-            return output
+        if (exitCode != 0) {
+            throw RuntimeException("Python process failed. exitCode=$exitCode\n$output")
         }
+
+        if (output.isBlank()) {
+            throw RuntimeException("Python returned empty output")
+        }
+
+        return output
     }
+}
