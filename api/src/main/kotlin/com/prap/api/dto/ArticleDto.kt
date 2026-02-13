@@ -1,4 +1,4 @@
-package com.prap.api.model
+package com.prap.api.dto
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import jakarta.validation.constraints.NotBlank

@@ -1,9 +1,9 @@
 package com.prap.api.python
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.prap.api.model.ArticleDto
-import com.prap.api.model.AuthorDto
-import com.prap.api.model.CategoryDto
+import com.prap.api.dto.ArticleDto
+import com.prap.api.dto.AuthorDto
+import com.prap.api.dto.CategoryDto
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -36,11 +36,11 @@ class PythonExtractorTest {
                 id = "3018",
                 url = "https://prap.kr/?p=3018",
                 title = "솔로몬 재판이 실화로? 아기 잘라 나누기",
-                thumbnail= "https://prap.kr/wp-content/uploads/2025/11/미스치프_썸네일.jpg-650x428.png",
-                category= CategoryDto(name = "프랩칼럼", url = "https://prap.kr/?cat=5"),
-                excerpt= "MSCHF의 〈King Solomon’s Baby〉로 만나는 새로운 소유와 가치의 세계! 대형 아기 조각상을 1,000조각으로 나누어 판매하며 소유 와 신뢰, 조각투자의 새로운 가능성을 제시한 흥미로운 프로젝트. 지금 확인해보세요!",
-                author= AuthorDto(name= "prap", url= "https://prap.kr/?author=2"),
-                published_date= "2025-11-17"
+                thumbnail = "https://prap.kr/wp-content/uploads/2025/11/미스치프_썸네일.jpg-650x428.png",
+                category = CategoryDto(name = "프랩칼럼", url = "https://prap.kr/?cat=5"),
+                excerpt = "MSCHF의 〈King Solomon’s Baby〉로 만나는 새로운 소유와 가치의 세계! 대형 아기 조각상을 1,000조각으로 나누어 판매하며 소유 와 신뢰, 조각투자의 새로운 가능성을 제시한 흥미로운 프로젝트. 지금 확인해보세요!",
+                author = AuthorDto(name = "prap", url = "https://prap.kr/?author=2"),
+                published_date = "2025-11-17"
             )
         )
 
