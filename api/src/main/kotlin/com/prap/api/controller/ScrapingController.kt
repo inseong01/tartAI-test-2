@@ -10,22 +10,19 @@ import com.prap.api.exception.ErrorCode
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.server.ResponseStatusException
 
 
 @RestController
+@RequestMapping("/api/articles")
 class ScrapingController {
 
-    private final val mapper = ObjectMapper()
+    private val mapper = ObjectMapper()
 
-    @GetMapping("/encoding-test")
-    fun encodingTest(): String {
-        return "한글 테스트 성공"
-    }
-
-    @GetMapping("/python-test")
-    fun pythonTest(): ResponseEntity<String> {
+    @GetMapping
+    fun scrapArticles(): ResponseEntity<String> {
         val pythonRunner = PythonRunner()
         val pythonExecutor = PythonExecutor(pythonRunner, this.mapper)
         val scrapingService = ScrapingService(pythonExecutor)
