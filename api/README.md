@@ -6,35 +6,75 @@
 
 - JDK 21
 - Kotlin 2.2.21
-- Spring Boot 4.0.2
+- Spring Boot 3.3.5
 - Gradle 9.3.0
 
 ## 실행 방법
 
-<!-- 작성 필요 -->
+### 1. 프로젝트 위치 이동
+
+```bash
+cd api
+```
+
+### 2. 빌드
+
+```bash
+./gradlew build
+```
+
+### 3. 서버 실행
+
+**방법 1. Gradle로 실행 (권장)**
+
+```bash
+./gradlew bootRun
+```
+
+**방법 2. 빌드된 Jar 실행**
+
+빌드 후 생성된 파일을 실행합니다.
+
+```bash
+java -jar build/libs/api-0.0.1-SNAPSHOT.jar
+```
+
+### 4. API 확인
+
+서버 실행 후 `Postman` 또는 브라우저에서 아래 주소로 확인할 수 있습니다.
+
+```
+http://localhost:8080/api/articles
+```
 
 ## 프로젝트 구조
 
-<!-- 세부 작성 필요 -->
-
 ```
 api/
-│
-├── README.md                  # 프로젝트 소개 문서
+├── README.md                          # 프로젝트 문서
+├── build.gradle.kts                   # Gradle 빌드 및 의존성 관리 설정
 └── src/
     ├── main/
-    └── test/
+    │   ├── kotlin/com/prap/api/
+    │   │   ├── config/                # 스프링 Bean 구성
+    │   │   ├── controller/            # REST API 요청 처리
+    │   │   ├── service/               # 비즈니스 로직 처리
+    │   │   ├── dto/                   # 데이터 객체
+    │   │   ├── exception/             # 예외 처리 관리
+    │   │   └── python/                # 파이썬 스크래퍼 연동 로직
+    │   └── resources/                 # 환경 설정 파일
+    └── test/                          # 단위 및 통합 테스트 코드
 ```
 
 ## API 엔드포인트
 
-| 엔드포인트           | HTTP 메서드 | 요청 파라미터 | 응답 예시    | 설명           |
-|-----------------|----------|---------|----------|--------------|
-| `/api/articles` | `GET`    | 없음      | JSON 리스트 | 전체 게시글 목록 조회 |
+| 엔드포인트      | HTTP 메서드 | 요청 파라미터 | 응답 예시   | 설명                  |
+| --------------- | ----------- | ------------- | ----------- | --------------------- |
+| `/api/articles` | `GET`       | 없음          | JSON 리스트 | 전체 게시글 목록 조회 |
 
 ### 예시 응답
 
-`GET` /api/articles
+**`GET` /api/articles**
 
 ```
 [
@@ -61,9 +101,9 @@ api/
 ## 예외 처리 전략
 
 - 클라이언트 요청 오류
-    - 잘못된 엔드포인트 접근 → `404 Not Found`
-    - 지원하지 않는 HTTP 메서드 요청 → `405 Method Not Allowed`
+  - 잘못된 엔드포인트 접근 → `400 Bad Request`
+  - 지원하지 않는 HTTP 메서드 요청 → `405 Method Not Allowed`
 
 - 서비스 내부 오류
-    - 스크래핑 서비스 실행 중 오류 발생 → `500 Internal Server Error`
-    - API 서버 자체 오류 → `Render`에서 관리
+  - 스크래핑 서비스 실행 중 오류 발생 → `500 Internal Server Error`
+  - API 서버 자체 오류 → `Render`에서 관리
