@@ -8,11 +8,13 @@ import java.nio.charset.StandardCharsets
 class PythonRunner {
 
     private fun getScraperProcess(): Process {
-        val pythonDir = File("../scraper")
+        val scraperPath = System.getenv("SCRAPER_PATH") ?: "../scraper"
+        val pythonDir = File(scraperPath)
+
         require(pythonDir.exists()) { "Python directory not found: $pythonDir" }
 
         return ProcessBuilder(
-            "python",
+            "python3",
             "-X", "utf8",
             "-m", "scraper.main"
         )

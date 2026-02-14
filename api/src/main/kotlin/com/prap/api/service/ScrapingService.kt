@@ -18,6 +18,7 @@ class ScrapingService(
             try {
                 this.pythonExecutor.runScraper()
             } catch (e: RuntimeException) {
+                // 디버깅 하는 경우 detail = e.message 사용
                 throw CustomException(ErrorCode.SERVICE_ERROR, "스크래퍼 실행 오류가 발생했습니다.")
             }
 
