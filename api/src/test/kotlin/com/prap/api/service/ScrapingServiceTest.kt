@@ -6,6 +6,8 @@ import com.prap.api.dto.CategoryDto
 import com.prap.api.service.ScrapingService
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.prap.api.exception.CustomException
+import com.prap.api.exception.ErrorCode
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.http.HttpStatus
@@ -54,7 +56,7 @@ class ScrapingServiceTest {
     }
 
     @Test
-    fun `서비스 호출에서 오류가 발생하면 INTERNAL_SERVER_ERROR 오류를 내보낸다`() {
+    fun `서비스 호출에서 오류가 발생하면 CustomException 오류를 내보낸다`() {
         val fakeRunner = FakePythonRunner(
             result = "",
             exception = RuntimeException("Python failed")
@@ -63,15 +65,15 @@ class ScrapingServiceTest {
 
         val service = ScrapingService(executor)
 
-        val exception = assertThrows<ResponseStatusException> {
+        val exception = assertThrows<CustomException> {
             service.getArticles()
         }
 
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, exception.statusCode)
+        assertEquals(ErrorCode.SERVICE_ERROR.message, exception.message)
     }
 
     @Test
-    fun `데이터 검증에서 오류가 발생하면 INTERNAL_SERVER_ERROR 오류를 내보낸다`() {
+    fun `데이터 검증에서 오류가 발생하면 CustomException 오류를 내보낸다`() {
         val EMPTY_TITLE_JSON_FORMAT = """
             [
                 {
@@ -91,10 +93,10 @@ class ScrapingServiceTest {
 
         val service = ScrapingService(executor)
 
-        val exception = assertThrows<ResponseStatusException> {
+        val exception = assertThrows<CustomException> {
             service.getArticles()
         }
 
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, exception.statusCode)
+        assertEquals(ErrorCode.SERVICE_ERROR.message, exception.message)
     }
 }
