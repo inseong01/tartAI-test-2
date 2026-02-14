@@ -10,6 +10,9 @@ RUN ./gradlew bootJar --no-daemon
 # 2. 실행 이미지
 FROM eclipse-temurin:21-jre
 
+# - ProcessBuilder 경로 설정
+ENV SCRAPER_PATH=/app/scraper   
+
 # - Python 설치
 RUN apt-get update && \
     apt-get install -y python3 python3-pip && \
