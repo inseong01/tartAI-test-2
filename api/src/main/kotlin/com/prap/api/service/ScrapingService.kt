@@ -24,7 +24,7 @@ class ScrapingService(
 
         val hasViolations = articles.any { validator.validate(it).isNotEmpty() }
         if (hasViolations) {
-            throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR)
+            throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "서비스 처리 중 데이터 검증 오류가 발생했습니다.")
         }
 
         return articles

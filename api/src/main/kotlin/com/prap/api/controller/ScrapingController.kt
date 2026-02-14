@@ -1,10 +1,11 @@
 package com.prap.api.controller
 
 import com.prap.api.dto.ArticleDto
-import com.prap.api.handler.ScraperExceptionHandler
 import com.prap.api.python.PythonExecutor
 import com.prap.api.python.PythonRunner
 import com.prap.api.service.ScrapingService
+import com.prap.api.exception.CustomException
+import com.prap.api.exception.ErrorCode
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.http.ResponseEntity
@@ -34,13 +35,7 @@ class ScrapingController {
         try {
             articles = scrapingService.getArticles()
         } catch (e: ResponseStatusException) {
-            val handler = ScraperExceptionHandler()
-            val output = handler.unknownError(mapOf("message" to e.message))
-            val json = this.mapper
-                .writerWithDefaultPrettyPrinter()
-                .writeValueAsString(output)
-
-            return ResponseEntity.ok(json)
+            throw CustomException(ErrorCode.SERVICE_ERROR, e.reason)
         }
 
         val json = this.mapper
