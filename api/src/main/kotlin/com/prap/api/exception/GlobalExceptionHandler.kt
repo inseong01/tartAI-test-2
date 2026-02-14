@@ -33,8 +33,7 @@ class GlobalExceptionHandler {
         )
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error)
     }
-
-
+    
     @ExceptionHandler(Exception::class)
     fun handleUnknownError(ex: Exception): ResponseEntity<ErrorResponseDto> {
         val error = ErrorResponseDto(
