@@ -5,10 +5,10 @@ import com.prap.api.dto.AuthorDto
 import com.prap.api.dto.CategoryDto
 import com.prap.api.service.ScrapingService
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.http.HttpStatus
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.web.server.ResponseStatusException
 import java.lang.RuntimeException
 import kotlin.test.assertEquals
