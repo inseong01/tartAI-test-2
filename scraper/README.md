@@ -11,23 +11,23 @@
 
 ## 실행 방법
 
-명령어는 `/scraper` 디렉터리 위치에서 실행 가능함으로, 먼저 `/scraper` 디렉터리 위치로 이동해야 합니다.
+### 1. 프로젝트 위치 이동
 
 ```bash
 cd scraper
 ```
 
-### 1. 환경 준비
+### 2. 환경 준비
 
 Python 3.10 이상의 환경에서 실행 가능합니다. 프로젝트마다 독립된 패키지 관리가 필요하므로 가상환경을 생성하고 활성화합니다.
 
-#### 1-1. 가상환경 생성
+#### 2-1. 가상환경 생성
 
 ```bash
 python -m venv venv
 ```
 
-#### 1-2. 가상환경 실행
+#### 2-2. 가상환경 실행
 
 **macOS/Linux**
 
@@ -41,7 +41,7 @@ source venv/bin/activate   # macOS/Linux
 venv\Scripts\activate      # Windows
 ```
 
-#### 1-3. 가상환경 종료
+#### 2-3. 가상환경 종료
 
 모든 작업이 종료 되었을 때 아래 명령어를 통해 원래 터미널 상태로 돌아갈 수 있습니다.
 
@@ -49,24 +49,16 @@ venv\Scripts\activate      # Windows
 deactivate
 ```
 
-### 2. 의존성 설치
+### 3. 의존성 설치
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. 실행
+### 4. 실행
 
 ```bash
 python -m scraper.main
-```
-
-### 4. 테스트
-
-단위 테스트 실행
-
-```bash
-pytest -v
 ```
 
 ## 프로젝트 구조
