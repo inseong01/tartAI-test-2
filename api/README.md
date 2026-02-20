@@ -47,6 +47,50 @@ java -jar build/libs/api-0.0.1-SNAPSHOT.jar
 http://localhost:8080/api/articles
 ```
 
+## 테스트
+
+### 테스트 실행 및 결과 확인
+
+아래 명령어를 실행하면 테스트가 수행되며,
+테스트 리포트와 커버리지 리포트가 함께 생성됩니다.
+
+```bash
+./gradlew test
+```
+
+실행이 완료되면 브라우저가 자동으로 열리며 다음 두 가지 리포트를 확인할 수 있습니다.
+
+- 테스트 결과 리포트
+- JaCoCo 커버리지 리포트
+
+자동으로 열리지 않는 경우 아래 경로에서 직접 확인할 수 있습니다.
+
+**테스트 리포트**
+
+```
+build/reports/tests/test/index.html
+```
+
+**커버리지 리포트**
+
+```
+build/reports/jacoco/test/html/index.html
+```
+
+### 커버리지만 확인하는 경우
+
+커버리지만 다시 생성하려면 아래 명령어를 실행합니다.
+
+```bash
+./gradlew jacocoTestReport
+```
+
+**리포트 경로**
+
+```
+build/reports/jacoco/test/html/index.html
+```
+
 ## 프로젝트 구조
 
 ```
