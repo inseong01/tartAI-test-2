@@ -6,8 +6,12 @@ import org.springframework.boot.test.context.SpringBootTest
 @SpringBootTest
 class ApiApplicationTests {
 
-	@Test
-	fun contextLoads() {
-	}
+    @Test
+    fun contextLoads() {
+    }
 
+    @Test
+    fun `main runs`() {
+        main(emptyArray())
+    }
 }
