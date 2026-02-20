@@ -1,3 +1,5 @@
+import org.gradle.internal.os.OperatingSystem
+
 plugins {
     kotlin("jvm") version "2.2.21"
     kotlin("plugin.spring") version "2.2.21"
@@ -40,4 +42,44 @@ kotlin {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+fun openFile(path: String) {
+    val os = org.gradle.internal.os.OperatingSystem.current()
+
+    when {
+        os.isWindows -> Runtime.getRuntime().exec(arrayOf("cmd", "/c", "start", path))
+        os.isMacOsX -> Runtime.getRuntime().exec(arrayOf("open", path))
+        else -> Runtime.getRuntime().exec(arrayOf("xdg-open", path))
+    }
+}
+
+tasks.test {
+    finalizedBy("jacocoTestReport", "openTestReport")
+}
+
+tasks.jacocoTestReport {
+    finalizedBy("openJacocoReport")
+}
+
+tasks.register("openTestReport") {
+    doLast {
+        val reportFile = layout.buildDirectory
+            .file("reports/tests/test/index.html")
+            .get()
+            .asFile
+
+        openFile(reportFile.absolutePath)
+    }
+}
+
+tasks.register("openJacocoReport") {
+    doLast {
+        val reportFile = layout.buildDirectory
+            .file("reports/jacoco/test/html/index.html")
+            .get()
+            .asFile
+
+        openFile(reportFile.absolutePath)
+    }
 }
