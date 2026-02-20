@@ -3,9 +3,9 @@ package com.prap.api.python
 class FakePythonRunner(
     private val result: String,
     private val exception: RuntimeException? = null
-) : PythonRunner() {
+) : PythonRunner("") {
 
-    override fun run(): String {
+    override fun run(command: String): String {
         if (exception != null) {
             throw RuntimeException(exception.message.toString())
         }

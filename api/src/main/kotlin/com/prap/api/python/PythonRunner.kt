@@ -1,24 +1,30 @@
 package com.prap.api.python
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import java.io.File
-import java.nio.charset.StandardCharsets
 
 @Component
-class PythonRunner {
+class PythonRunner(
+    @Value("\${scraper.path:../scraper}")
+    private val scraperPath: String
+) {
 
-    private fun getScraperProcess(): Process {
-        val scraperPath = System.getenv("SCRAPER_PATH") ?: "../scraper"
-        val pythonDir = File(scraperPath)
+    fun getDirPathFile(): File {
+        val pythonDir = File(this.scraperPath)
 
         require(pythonDir.exists()) { "Python directory not found: $pythonDir" }
 
+        return pythonDir
+    }
+
+    fun createScraperProcess(pythonDirFile: File, packageName: String): Process {
         return ProcessBuilder(
             "python3",
             "-X", "utf8",
-            "-m", "scraper.main"
+            "-m", packageName
         )
-            .directory(pythonDir)
+            .directory(pythonDirFile)
             .redirectErrorStream(true)
             .apply {
                 environment()["PYTHONIOENCODING"] = "UTF-8"
@@ -26,12 +32,14 @@ class PythonRunner {
             .start()
     }
 
-    fun run(): String {
-        val process = this.getScraperProcess()
+    fun readProcessOutput(process: Process): String {
+        return process.inputStream.reader(Charsets.UTF_8).readText()
+    }
 
-        val output = process.inputStream
-            .bufferedReader(StandardCharsets.UTF_8)
-            .readText()
+    fun run(packageName: String): String {
+        val pythonDir = this.getDirPathFile()
+        val process = this.createScraperProcess(pythonDir, packageName)
+        val output = this.readProcessOutput(process)
 
         val exitCode = process.waitFor()
 

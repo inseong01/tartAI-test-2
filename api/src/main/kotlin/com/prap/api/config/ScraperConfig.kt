@@ -4,6 +4,7 @@ import com.prap.api.python.PythonExecutor
 import com.prap.api.python.PythonRunner
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -11,7 +12,11 @@ import org.springframework.context.annotation.Configuration
 class ScraperConfig {
 
     @Bean
-    fun pythonRunner(): PythonRunner = PythonRunner()
+    fun pythonRunner(
+        @Value("\${scraper.path}") scraperPath: String
+    ): PythonRunner {
+        return PythonRunner(scraperPath)
+    }
 
     @Bean
     fun pythonExecutor(pythonRunner: PythonRunner, objectMapper: ObjectMapper): PythonExecutor {

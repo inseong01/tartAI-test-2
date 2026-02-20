@@ -14,7 +14,7 @@ class PythonExecutor(
 
     fun runScraper(): List<ArticleDto> {
         try {
-            val output = this.pythonRunner.run()
+            val output = this.pythonRunner.run("scraper.main")
             return objectMapper.readValue(output)
         } catch (e: Exception) {
             throw RuntimeException(e.message)
